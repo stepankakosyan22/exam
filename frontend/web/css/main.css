@@ -1,0 +1,76 @@
+.required_asterix {
+    color: red;
+    font-size: 110%;
+}
+.navbar-inverse{
+    background-color: maroon;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .btn-link{
+    color: white;
+}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .btn-link:hover{
+    background-color: darkred;
+}
+
+.navbar-inverse .navbar-toggle{
+    border-color: white;
+}
+.navbar-inverse .navbar-toggle:hover{
+    background-color: #761c19;
+}
+.login_button, .btn_create, .card_button{
+    background-color: maroon;
+    width:100%;
+    color: white;
+    font-size: 150%;
+}
+.login_button:hover, .card_button:hover, .btn_create:hover{
+    background-color: #550000 ;
+    color: white;
+}
+.breadcrumb{
+    background-color: transparent;
+}
+.breadcrumb li a{
+    color: maroon;
+    font-size: 16px;
+}
+.breadcrumb>.active{
+    color: maroon;
+    text-decoration: dashed;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
+    color: white;
+    background-color: darkred;
+    font-size: 20px;
+    border: 1px solid white;
+    border-bottom: none;
+    border-top: none;
+}
+.navbar-inverse .navbar-nav{
+    color:whitesmoke;
+}
+.navbar-inverse .navbar-nav > li > a{
+    color:white;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 30%;
+    text-align: center;
+    float: left;
+}
+.card_button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+}
+.card_a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+.card_a:hover{
+    color: maroon;
+}

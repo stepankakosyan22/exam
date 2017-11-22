@@ -1,0 +1,55 @@
+.required_asterix {
+    color: red;
+    font-size: 110%;
+}
+.navbar-inverse{
+    background-color: darkgreen;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .btn-link{
+    color: white;
+}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .btn-link:hover{
+   background-color: forestgreen;
+}
+.navbar-inverse .navbar-toggle{
+    border-color: white;
+}
+.navbar-inverse .navbar-toggle:hover{
+    background-color: #761c19;
+}
+.login_button, .btn_create{
+    background-color: forestgreen;
+    width:100%;
+    color: white;
+    font-size: 150%;
+}
+.login_button:hover, .btn_create:hover{
+    background-color: darkgreen;
+    color: white;
+}
+
+.breadcrumb{
+    background-color: transparent;
+}
+.breadcrumb li a{
+    color: darkgreen;
+    font-size: 18px;
+}
+.breadcrumb>.active{
+    color: forestgreen;
+    text-decoration: dashed;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
+    color: white;
+    background-color: forestgreen;
+    font-size: 20px;
+    border: 1px solid white;
+    border-bottom: none;
+    border-top: none;
+}
+.navbar-inverse .navbar-nav{
+    color:whitesmoke;
+}
+.navbar-inverse .navbar-nav > li > a{
+    color:white;
+}
