@@ -27,7 +27,10 @@ $this->title = 'Exam';
             <?php } ?>
         </div>
     <?php }?>
+    <?php  if (Yii::$app->user->identity->role ==='Teacher'){  ?>
+        Teacher page
+    <?php }?>
     <?php if (Yii::$app->user->identity->role ==='Main Admin'){ ?>
         Main Admin page
-    <?php }?>
+    <?php } ?>
 </div>

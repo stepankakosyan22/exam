@@ -38,7 +38,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['role'], 'required','message'=>'Choose one of roles'],
-            [['full_name','username','password'], 'required'],
+//            [['full_name','username','password'], 'required'],
             [['full_name'], 'string','min'=>2],
             [['prof_image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
             [['username','password'], 'string','min'=>6, 'max'=>20],

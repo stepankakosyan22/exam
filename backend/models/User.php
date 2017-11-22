@@ -38,18 +38,20 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['role'], 'required','message'=>'Select role'],
-            [['full_name','username','password'], 'required'],
+            [['role'], 'required','message'=>'Choose one of roles'],
+//            [['full_name','username','password'], 'required'],
             [['full_name'], 'string','min'=>2],
             [['username','password'], 'string','min'=>6, 'max'=>20],
             [['full_name'], 'match', 'pattern' => '/^[a-zA-Z\-\s]+$/i','message'=>'There is non letter characters.'],
             [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9\!\@\#\$\&\*\_\+\+\-\.]+$/i',
-                                                 'message'=>'Username must have letters, numbers or those symbols (! @ # $ & * _ + - .)'],
+                'message'=>'Username must have letters, numbers or those symbols (! @ # $ & * _ + - .)'],
+
             [['password'], 'match', 'pattern' => '/^[a-zA-Z0-9\!\@\#\$\&\*\_\+\+\-\.]+$/i',
-                                                 'message'=>'Password must have English letters, numbers or those symbols (! @ # $ & * _ + - .)'],
+                'message'=>'Password must have English letters, numbers or those symbols (! @ # $ & * _ + - .)'],
+
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['email', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
-            [['role'], 'string', 'max' => 100],
+            [['role'], 'string'],
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
         ];
@@ -81,17 +83,14 @@ class User extends \yii\db\ActiveRecord
      */
     public function creatingUser()
     {
-        if (!$this->validate()) {
-            return null;
-        }
-
         $user = new User();
         $user->username = $this->username;
         $user->role = $this->role;
         $user->full_name = $this->full_name;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        return $user->save() ? $user : null;
+        $user->save();
+        return  $user ;
     }
 
     /**
@@ -103,6 +102,7 @@ class User extends \yii\db\ActiveRecord
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
+
 
     /**
      * Generates "remember me" authentication key

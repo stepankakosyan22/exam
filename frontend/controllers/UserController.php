@@ -67,8 +67,7 @@ class UserController extends Controller
         $model = new User();
         if ($model->load(Yii::$app->request->post())) {
             $user = $model->creatingUser();
-            return $this->redirect(['view', 'id' => $user->id]);
-
+            return $this->redirect(['/user/index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

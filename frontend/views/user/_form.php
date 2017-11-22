@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'role', [
         "template" => "<label> Role <span class='required_asterix'>*</span></label>\n{input}\n{hint}\n{error}"
-    ])->dropDownList(['Moderator' => 'Moderator', 'Student' => 'Student'], ['prompt' => 'Select role']) ?>
+    ])->dropDownList(['Moderator' => 'Moderator', 'Student' => 'Student', 'Teacher' => 'Teacher'], ['prompt' => 'Select role']) ?>
 
     <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
 

@@ -45,7 +45,6 @@ AppAsset::register($this);
             $menuItems[]= ['label' => ' User', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-user']];
         }
         $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
-
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
