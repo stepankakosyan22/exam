@@ -6,5 +6,7 @@
             "email": "stepankakosyan22@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "2amigos/yii2-date-picker-widget": "~1.0.7"
+    }
 }

@@ -1,19 +1,19 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use frontend\models\User;
-use frontend\models\UserSearch;
+use backend\models\Groups;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * GroupsController implements the CRUD actions for Groups model.
  */
-class UserController extends Controller
+class GroupsController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,22 +31,19 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Groups models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $groups=Groups::find()->where(['archived'=>0])->all();
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'groups' => $groups,
         ]);
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Groups model.
      * @param integer $id
      * @return mixed
      */
@@ -58,16 +55,16 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Groups model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
-        if ($model->load(Yii::$app->request->post())) {
-            $user = $model->creatingUser();
-            return $this->redirect(['/user/index']);
+        $model = new Groups();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_group]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,26 +72,41 @@ class UserController extends Controller
         }
     }
 
+    public function actionArchivegroup(){
+        if (\Yii::$app->request->isAjax) {
+            $data = \Yii::$app->request->post();
+            $group_id=$data['group_id'];
+            $group= Groups::findOne(['id_group'=>$group_id]);
+            $group->archived=1;
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if($group->validate()){
+                $group->save();
+            }
+            return $this->redirect(['/groups/index']);
+        }
+        return $this->render('/groups/index');
+    }
+
+    public function actionGroupsvalidation()
+    {
+        $model = new Groups();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
+    }
+
     /**
-     * Updates an existing User model.
+     * Updates an existing Groups model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $model = \backend\models\User::findOne($id);
-
-        if ($model->load(Yii::$app->request->post()) ) {
-            $imageName = $model->username;
-            $model->prof_image = UploadedFile::getInstance($model, 'prof_image');
-            if (!empty($model->prof_image)) {
-                $model->prof_image->saveAs('images/users/' . $imageName . '.' . $model->prof_image->extension);
-                $model->prof_image = 'images/users/' . $imageName . '.' . $model->prof_image->extension;
-            }
-                $model->update();
-                return $this->redirect(['/']);
-
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_group]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,7 +115,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Groups model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -116,15 +128,15 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Groups model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Groups the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Groups::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

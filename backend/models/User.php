@@ -9,11 +9,15 @@ use yii\base\Model;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $full_name
+ * @property integer $enable
+ * @property string $name
+ * @property string $surname
  * @property string $username
  * @property string $email
  * @property integer $status
  * @property string $role
+ * @property string $group
+ * @property string $passport_scan
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password_hash
@@ -38,11 +42,10 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['role'], 'required','message'=>'Choose one of roles'],
-//            [['full_name','username','password'], 'required'],
-            [['full_name'], 'string','min'=>2],
+//            [['role'], 'required','message'=>'Choose one of roles'],
+            [['name','surname'], 'string','min'=>2],
             [['username','password'], 'string','min'=>6, 'max'=>20],
-            [['full_name'], 'match', 'pattern' => '/^[a-zA-Z\-\s]+$/i','message'=>'There is non letter characters.'],
+            [['name','surname'], 'match', 'pattern' => '/^[a-zA-Z\-\s]+$/i','message'=>'There is non letter characters.'],
             [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9\!\@\#\$\&\*\_\+\+\-\.]+$/i',
                 'message'=>'Username must have letters, numbers or those symbols (! @ # $ & * _ + - .)'],
 
@@ -51,7 +54,9 @@ class User extends \yii\db\ActiveRecord
 
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['email', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
-            [['role'], 'string'],
+            [['role','passport_scan','group'], 'string'],
+            [['enable'], 'integer'],
+            [['enable'], 'default','value'=>NULL],
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
         ];
@@ -64,11 +69,15 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'full_name' => 'Full Name',
+            'name' => 'Name',
+            'surname' => 'Surname',
             'username' => 'Username',
             'email' => 'Email',
             'status' => 'Status',
             'role' => 'Role',
+            'passport_scan' => 'Passport scan',
+            'group' => 'Group',
+            'enable' => 'Enable',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'password_hash' => 'Password Hash',
@@ -86,7 +95,11 @@ class User extends \yii\db\ActiveRecord
         $user = new User();
         $user->username = $this->username;
         $user->role = $this->role;
-        $user->full_name = $this->full_name;
+        $user->name = $this->name;
+        $user->enable = $this->enable;
+        $user->surname = $this->surname;
+        $user->passport_scan = $this->passport_scan;
+        $user->group = $this->group;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->save();

@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->user->identity->full_name,
+        'brandLabel' => Yii::$app->user->identity->name .  Yii::$app->user->identity->surname,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top navbar-nav nav',
@@ -42,7 +42,12 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[]= ['label' => ' Login', 'url' => ['site/login'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
     } else {
-        $menuItems[]= ['label' => ' User', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-user']];
+        $menuItems[]= ['label' => ' Admins', 'url' => ['/user/admins'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Student', 'url' => ['user/students'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Teacher', 'url' => ['user/teachers'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Exams', 'url' => ['site/exams'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Groups', 'url' => ['groups/index'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' +', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post']];
         $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
     }
     echo Nav::widget([

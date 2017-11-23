@@ -17,13 +17,13 @@
 .navbar-inverse .navbar-toggle:hover{
     background-color: #761c19;
 }
-.login_button, .btn_create{
+.login_button, .btn_create ,.create_new_admin{
     background-color: forestgreen;
     width:100%;
     color: white;
     font-size: 150%;
 }
-.login_button:hover, .btn_create:hover{
+.login_button:hover, .btn_create:hover, .create_new_admin{
     background-color: darkgreen;
     color: white;
 }
@@ -33,7 +33,7 @@
 }
 .breadcrumb li a{
     color: darkgreen;
-    font-size: 18px;
+    font-size: 14px;
 }
 .breadcrumb>.active{
     color: forestgreen;
@@ -52,4 +52,26 @@
 }
 .navbar-inverse .navbar-nav > li > a{
     color:white;
+}
+.add_class, .add_admin{
+    color:white;
+    background-color: darkgreen;
+    width:15%;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.add_class:hover, .add_admin:hover{
+    color:white;
+    background-color: forestgreen;
+}
+.archive_class{
+    color:white;
+    background-color: maroon;
+    width:15%;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.archive_class:hover{
+    color:white;
+    background-color: darkred;
 }

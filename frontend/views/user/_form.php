@@ -22,10 +22,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput() ?>
 
-    <label class="btn btn-default btn-sm center-block btn-file">
-        <i class="glyphicon glyphicon-upload" style="float:left" aria-hidden="true"></i>
-        <?= $form->field($model, 'prof_image')->fileInput(['style'=>'display:none'])->label('Profile image') ?>
-    </label>
+    <?php if ($model->id){ ?>
+        <label class="btn btn-default btn-sm center-block btn-file">
+            <i class="glyphicon glyphicon-upload" style="float:left" aria-hidden="true"></i>
+            <?= $form->field($model, 'prof_image')->fileInput(['style'=>'display:none'])->label('Profile image') ?>
+        </label>
+    <?php }?>
 
     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn_create']) ?>
 

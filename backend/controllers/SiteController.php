@@ -34,6 +34,22 @@ class SiteController extends Controller
                         'actions' => ['user', 'index'],
                         'allow' => true,
                     ],
+                    [
+                        'actions' => ['user', 'students'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['exams', 'index'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['teachers', 'index'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['groupss', 'index'],
+                        'allow' => true,
+                    ],
                 ],
             ],
             'verbs' => [
@@ -65,6 +81,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Displays exams page.
+     *
+     * @return string
+     */
+    public function actionExams()
+    {
+        return $this->render('/site/exams');
     }
 
     /**
