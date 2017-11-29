@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->user->identity->full_name,
+        'brandLabel' => Yii::$app->user->identity->name.' '.Yii::$app->user->identity->surname,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top navbar-nav nav',
@@ -37,15 +37,32 @@ AppAsset::register($this);
             'style'=>'font-size:18px;color:white'
         ],
     ]);
-    $menuItems[]= ['label' => ' Home', 'url' => ['site/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-home']];
+
     if (Yii::$app->user->isGuest) {
+        $menuItems[]= ['label' => '', 'url' => ['site/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-home']];
         $menuItems[]= ['label' => ' Login', 'url' => ['site/login'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
-    } else {
-        if (Yii::$app->user->identity->role!=='Student') {
-            $menuItems[]= ['label' => ' User', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-user']];
-        }
+    }
+    if (Yii::$app->user->identity->role==='Admin') {
+        $menuItems[]= ['label' => '', 'url' => ['site/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-home']];
+        $menuItems[]= ['label' => ' Student', 'url' => ['user/students'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Teacher', 'url' => ['user/teachers'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Exams', 'url' => ['site/exams'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Groups', 'url' => ['groups/index'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' +', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post']];
         $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
     }
+    if (Yii::$app->user->identity->role==='Teacher') {
+        $menuItems[]= ['label' => '', 'url' => ['site/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-home']];
+        $menuItems[]= ['label' => ' Exams', 'url' => ['exams/index'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Questions', 'url' => ['questions/index'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
+    }
+    if (Yii::$app->user->identity->role==='Student') {
+        $menuItems[]= ['label' => '', 'url' => ['site/index'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-home']];
+        $menuItems[]= ['label' => ' Exams', 'url' => ['site/exams'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

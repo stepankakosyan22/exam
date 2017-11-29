@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\Subjects;
+use backend\models\User;
 use Yii;
 use backend\models\Groups;
 use yii\data\ActiveDataProvider;
@@ -37,8 +39,12 @@ class GroupsController extends Controller
     public function actionIndex()
     {
         $groups=Groups::find()->where(['archived'=>0])->all();
+        $subjects=Subjects::find()->all();
+        $teachers=User::find()->where(['role'=>'Teacher'])->all();
         return $this->render('index', [
             'groups' => $groups,
+            'subjects' => $subjects,
+            'teachers' => $teachers,
         ]);
     }
 
@@ -62,7 +68,7 @@ class GroupsController extends Controller
     public function actionCreate()
     {
         $model = new Groups();
-
+        $model->scenario='create_group';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_group]);
         } else {
@@ -72,7 +78,8 @@ class GroupsController extends Controller
         }
     }
 
-    public function actionArchivegroup(){
+    public function actionArchivegroup()
+    {
         if (\Yii::$app->request->isAjax) {
             $data = \Yii::$app->request->post();
             $group_id=$data['group_id'];

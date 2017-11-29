@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->user->identity->name .  Yii::$app->user->identity->surname,
+        'brandLabel' => Yii::$app->user->identity->name . Yii::$app->user->identity->surname,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top navbar-nav nav',
@@ -47,7 +47,7 @@ AppAsset::register($this);
         $menuItems[]= ['label' => ' Teacher', 'url' => ['user/teachers'],'linkOptions' => ['data-method' => 'post']];
         $menuItems[]= ['label' => ' Exams', 'url' => ['site/exams'],'linkOptions' => ['data-method' => 'post']];
         $menuItems[]= ['label' => ' Groups', 'url' => ['groups/index'],'linkOptions' => ['data-method' => 'post']];
-        $menuItems[]= ['label' => ' +', 'url' => ['user/index'],'linkOptions' => ['data-method' => 'post']];
+        $menuItems[]= ['label' => ' +', 'url' => ['user/create'],'linkOptions' => ['data-method' => 'post']];
         $menuItems[]= ['label' => ' Logout', 'url' => ['site/logout'],'linkOptions' => ['data-method' => 'post','class'=>'glyphicon glyphicon-log-in']];
     }
     echo Nav::widget([

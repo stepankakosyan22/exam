@@ -19,17 +19,22 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'group_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'group_start')->widget(
-        DatePicker::className(), ['inline' => false, 'clientOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd',]
-    ])->label('Start date <span style="color:red;font-size: 125%">*</span>') ?>
+    <?= $form->field($model, 'group_start')->textInput(['id'=>'from'])?>
 
-    <?= $form->field($model, 'group_end')->widget(
-        DatePicker::className(), ['inline' => false, 'clientOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd',]
-    ])->label('End date <span style="color:red;font-size: 125%">*</span>') ?>
+    <?= $form->field($model, 'group_end')->textInput(['id'=>'to']) ?>
+
 
     <?php if ($model->id_group){ ?>
         <div data-id="<?= $model->id_group ?>" class="archive_class btn">Archive</div>
-    <?php }?>
+        <?= Html::a('', ['/groups/delete', 'id' => $model->id_group], [
+            'class' => 'btn btn-default glyphicon glyphicon-remove pull-right',
+            'style' => 'font-size: 120%;color: maroon;cursor:pointer;margin:3px',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    <?php } ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn_create' : 'btn btn_create']) ?>

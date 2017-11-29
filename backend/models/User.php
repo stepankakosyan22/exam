@@ -10,8 +10,10 @@ use yii\base\Model;
  *
  * @property integer $id
  * @property integer $enable
+ * @property integer $activated
  * @property string $name
  * @property string $surname
+ * @property string $password
  * @property string $username
  * @property string $email
  * @property integer $status
@@ -44,24 +46,50 @@ class User extends \yii\db\ActiveRecord
         return [
 //            [['role'], 'required','message'=>'Choose one of roles'],
             [['name','surname'], 'string','min'=>2],
+            [['name','surname','username','password'],'required','on'=>'create'],
+            [['name','surname','username'],'required', 'on'=>'edit'],
+
+            [['name','surname','username','group'],'required','on'=>'edit_student'],
+            [['name','surname','username','password','passport_scan','group'],'required','on'=>'create_student'],
+
             [['username','password'], 'string','min'=>6, 'max'=>20],
             [['name','surname'], 'match', 'pattern' => '/^[a-zA-Z\-\s]+$/i','message'=>'There is non letter characters.'],
             [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9\!\@\#\$\&\*\_\+\+\-\.]+$/i',
                 'message'=>'Username must have letters, numbers or those symbols (! @ # $ & * _ + - .)'],
+
+            [['passport_scan'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg','on'=>'edit_student'],
+            [['passport_scan'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg','on'=>'create_student'],
+
+            ['group','string','on'=>'edit_student'],
+            ['group','string','on'=>'create_student'],
 
             [['password'], 'match', 'pattern' => '/^[a-zA-Z0-9\!\@\#\$\&\*\_\+\+\-\.]+$/i',
                 'message'=>'Password must have English letters, numbers or those symbols (! @ # $ & * _ + - .)'],
 
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['email', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
+
             [['role','passport_scan','group'], 'string'],
+
+            [['activated'], 'integer'],
+            [['activated'], 'default','value'=>0],
+
             [['enable'], 'integer'],
-            [['enable'], 'default','value'=>NULL],
+            [['enable'], 'default','value'=>1],
+
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
         ];
     }
-
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['name','surname','username','password','role'];
+        $scenarios['edit'] = ['name','surname','username','password','enable','role'];
+        $scenarios['edit_student'] =   ['name','surname','username','password','enable','role','group','passport_scan'];
+        $scenarios['create_student'] = ['name','surname','username','password','enable','role','group','passport_scan'];
+        return $scenarios;
+    }
     /**
      * @inheritdoc
      */
@@ -75,9 +103,11 @@ class User extends \yii\db\ActiveRecord
             'email' => 'Email',
             'status' => 'Status',
             'role' => 'Role',
+            'password' => 'Password',
             'passport_scan' => 'Passport scan',
             'group' => 'Group',
             'enable' => 'Enable',
+            'activated' => 'Activated',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'password_hash' => 'Password Hash',
@@ -97,6 +127,7 @@ class User extends \yii\db\ActiveRecord
         $user->role = $this->role;
         $user->name = $this->name;
         $user->enable = $this->enable;
+        $user->activated = $this->activated;
         $user->surname = $this->surname;
         $user->passport_scan = $this->passport_scan;
         $user->group = $this->group;

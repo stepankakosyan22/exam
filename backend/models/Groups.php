@@ -35,9 +35,15 @@ class Groups extends \yii\db\ActiveRecord
             [['group_end'], 'validateDates'],
             [['archived'], 'default','value'=>0],
             [['group_name'], 'string', 'max' => 255],
+            [['group_name'], 'unique','on'=>'create_group'],
         ];
     }
-
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create_group'] = ['group_start','group_end','group_name','archived'];
+        return $scenarios;
+    }
     /**
      * @inheritdoc
      */
@@ -45,9 +51,9 @@ class Groups extends \yii\db\ActiveRecord
     {
         return [
             'id_group' => 'Id Group',
-            'group_name' => 'Group Name',
-            'group_start' => 'Group Start',
-            'group_end' => 'Group End',
+            'group_name' => 'Name',
+            'group_start' => 'Start',
+            'group_end' => 'End',
             'archived' => 'Archived',
         ];
     }

@@ -6,9 +6,6 @@ use yii\helpers\Html;
 /* @var $model backend\models\Groups */
 
 $this->title = 'Edit ' . $model->group_name .' group';
-$this->params['breadcrumbs'][] = ['label' => 'Groups', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->group_name, 'url' => ['view', 'id' => $model->id_group]];
-$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="groups-update">
 

@@ -74,3 +74,57 @@
 .card_a:hover{
     color: maroon;
 }
+.add_class, .add_admin{
+    color:white;
+    background-color: darkgreen;
+    width:15%;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.add_class:hover, .add_admin:hover{
+    color:white;
+    background-color: forestgreen;
+}
+.archive_class{
+    color:white;
+    background-color: darkgreen;
+    width:15%;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.archive_class:hover{
+    color:white;
+    background-color: forestgreen;
+}
+.btn_save, .btn_finish{
+    width:49%;
+    color: white;
+    font-size: large;
+}
+.btn_save{
+    background-color: maroon;
+    float:left;
+}
+.btn_finish{
+    background-color: darkgreen;
+    float:right;
+}
+
+.yesButtonClass,.noButtonClass{
+    color:white;
+    font-size: large;
+}
+.yesButtonClass{
+    background-color: maroon;
+}
+.yesButtonClass:hover {
+    background-color: forestgreen;
+    color:white;
+}
+.noButtonClass{
+    background-color: darkgreen;
+}
+.noButtonClass:hover{
+    background-color: forestgreen;
+    color:white;
+}

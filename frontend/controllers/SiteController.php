@@ -81,7 +81,15 @@ class SiteController extends Controller
             'user'=>$user
         ]);
     }
-
+    /**
+     * Displays exams page.
+     *
+     * @return string
+     */
+    public function actionExams()
+    {
+        return $this->render('/site/exams');
+    }
     /**
      * Logs in a user.
      *

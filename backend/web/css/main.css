@@ -75,3 +75,156 @@
     color:white;
     background-color: darkred;
 }
+.btn_save, .btn_finish{
+    width:49%;
+    color: white;
+    font-size: large;
+}
+.btn_save{
+    background-color: darkgreen;
+    float:left;
+}
+.btn_finish{
+    background-color: maroon;
+    float:right;
+}
+
+.yesButtonClass,.noButtonClass{
+    color:white;
+    font-size: large;
+}
+.yesButtonClass{
+    background-color: darkgreen;
+}
+.yesButtonClass:hover {
+    background-color: forestgreen;
+    color:white;
+}
+.noButtonClass{
+    background-color: maroon;
+}
+.noButtonClass:hover{
+    background-color: darkred;
+    color:white;
+}
+.td_view{
+    font-weight: bolder;
+}
+
+.contain {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.contain input {
+    opacity: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border:1px solid maroon;
+    border-radius: 50%;
+}
+
+.contain:hover input ~ .checkmark {
+    background-color: red;
+}
+
+.contain input:checked ~ .checkmark {
+    background-color: maroon;
+}
+
+
+
+
+
+
+
+
+
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.modal-content{
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 50px;
+    right: 35px;
+    color: darkgreen;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: forestgreen;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
